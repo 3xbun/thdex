@@ -7,13 +7,32 @@
 }
 
 :root {
-  --black: #313131;
+  --black: #202124;
+  --dark: #303134;
+  --gray: #8f9093;
   --white: #fff;
   --primary: #e3350d;
+  --secondary: #ffe165;
 }
 
 body {
   background-color: var(--black);
   color: var(--white);
   font-family: "Noto Sans Thai", sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  width: 95vw;
+  margin: 1em auto;
+  padding-bottom: 10vh;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+li {
+  list-style: none;
 }
