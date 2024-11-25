@@ -32,12 +32,18 @@
         <p>{{ card.illustrator }}</p>
       </div>
       <div class="item">
+        <p>Rarity</p>
+        <p v-if="tcgTH.rarity">{{ tcgTH.rarity }}</p>
+        <p v-else>n/a</p>
+      </div>
+      <div class="item">
         <p>National Number</p>
         <p>{{ card.national_no }}</p>
       </div>
       <div class="item">
         <p>Identifier</p>
-        <p>{{ card.set_no }}</p>
+        <p v-if="tcgTH.rarity">{{ tcgTH.set_code_card_number }}</p>
+        <p v-else>n/a</p>
       </div>
     </div>
     <hr v-if="tcgTH.updated_at">
