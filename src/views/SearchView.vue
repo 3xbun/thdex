@@ -6,7 +6,8 @@
 
   <ul class="cards" v-if="searchText != ''">
     <li v-for="Card in Cards" :key="Card.id" @click="selectCard(Card.id)">
-      <img :src="Card.image" alt="" srcset="">
+      <Card :cardID="Card.id" />
+      <!-- <img loading="lazy" id="card" :src="Card.image" alt="" srcset=""> -->
     </li>
   </ul>
 
@@ -21,6 +22,8 @@
 import { computed, ref } from 'vue';
 import Data from '../assets/Cards.json';
 import AddCard from '../components/AddCard.vue';
+
+import Card from '../components/Card.vue';
 
 const isAdd = ref(false)
 const cardID = ref("")
@@ -94,9 +97,5 @@ i {
 
 li {
   width: 30%
-}
-
-img {
-  width: 100%;
 }
 </style>
