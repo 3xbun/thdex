@@ -1,3 +1,27 @@
+## [1.3.1](https://github.com/3xbun/thdex/compare/v1.3.0...v1.3.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* add more bottom padding ([b895c5d](https://github.com/3xbun/thdex/commit/b895c5d1acb900d9ae2743f3a583bb473a24f15a))
+
+
+
+# [1.3.0](https://github.com/3xbun/thdex/compare/v1.2.1...v1.3.0) (2024-11-25)
+
+
+### Bug Fixes
+
+* fix URL not working correctly ([8a46b6d](https://github.com/3xbun/thdex/commit/8a46b6d774e050596aaae6acb599ac59558a968b))
+
+
+### Features
+
+* add more data retived from TCG Thailand ([a20e086](https://github.com/3xbun/thdex/commit/a20e08634ba62be60984286ccc7de3a907bf1759))
+* pull real price from TCG Thailand ([a58c275](https://github.com/3xbun/thdex/commit/a58c27524c099d587b44f38de2a5e6e4d09be9ec))
+
+
+
 ## [1.2.1](https://github.com/3xbun/thdex/compare/v1.2.0...v1.2.1) (2024-11-25)
 
 
