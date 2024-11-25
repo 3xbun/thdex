@@ -1,3 +1,12 @@
+## [1.4.1](https://github.com/3xbun/thdex/compare/v1.4.0...v1.4.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* add CHANGELOG.md in public folder ([116d444](https://github.com/3xbun/thdex/commit/116d444f9225c4ecfcc2b8c31dba914e121f2a39))
+
+
+
 # [1.4.0](https://github.com/3xbun/thdex/compare/v1.3.2...v1.4.0) (2024-11-25)
 
 
