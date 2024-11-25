@@ -1,6 +1,6 @@
 <template>
   <h1>แฟ้มสะสม</h1>
-  <ul class="cards" v-if="searchText != ''">
+  <ul class="cards">
     <li v-for="card in Collections" :key="card.cardID" @click="selectCard(card.cardID, card.amt)">
       <img :src="getCardImage(card.cardID)" alt="" srcset="">
     </li>
