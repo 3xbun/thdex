@@ -25,7 +25,7 @@ import { onMounted, ref } from 'vue';
 const changelog = ref('')
 
 onMounted(() => {
-  axios.get("../../CHANGELOG.md").then(res => {
+  axios.get("/CHANGELOG.md").then(res => {
     console.log(res.data)
 
     changelog.value = res.data
