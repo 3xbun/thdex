@@ -40,7 +40,6 @@ const select = (page) => {
 }
 
 onMounted(() => {
-  console.log(window.location.pathname.substring(1));
   activePage.value = window.location.pathname.substring(1)
 })
 </script>
