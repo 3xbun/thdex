@@ -41,3 +41,19 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+#changelog li {
+  list-style: circle;
+  margin-left: 3em;
+}
+
+#changelog a {
+  color: var(--secondary);
+}
+
+#changelog h1,
+#changelog h2 {
+  margin-top: 1em;
+  border-bottom: 1px solid var(--gray);
+  margin-bottom: .5em;
+}

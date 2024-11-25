@@ -1,5 +1,8 @@
 <template>
   <div>
+    <h1>Changelog</h1>
+    <div id="changelog"></div>
+    <hr>
     <p>
       © 2024 Bunnasorn Kaewsiri, All rights reserved.
     </p>
@@ -15,7 +18,20 @@
 </template>
 
 <script setup>
+import axios from 'axios';
+import { marked } from 'marked';
+import { onMounted, ref } from 'vue';
 
+const changelog = ref('')
+
+onMounted(() => {
+  axios.get("../../CHANGELOG.md").then(res => {
+    console.log(res.data)
+
+    changelog.value = res.data
+    document.getElementById("changelog").innerHTML = marked.parse(res.data)
+  })
+})
 </script>
 
 <style scoped>
@@ -28,5 +44,9 @@ hr {
   margin: 1em;
   width: 90%;
   border: 1px solid var(--dark);
+}
+
+#changelog {
+  text-align: left
 }
 </style>
