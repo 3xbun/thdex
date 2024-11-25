@@ -22,17 +22,18 @@
 <style scoped>
 .tag {
   position: absolute;
-  top: 5em;
-  left: 8em;
-  padding: .5em .5em .3em;
-  border-radius: 4px;
+  top: 2.9rem;
+  left: 5.5rem;
+  padding: .2rem .2rem .1rem;
+  border-radius: .2rem;
   background-color: #e40a1f;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
   color: #fff;
-  font-size: .2em;
-  line-height: .4em;
+  font-size: .35rem;
+  line-height: .7rem;
   letter-spacing: .5px;
-  transform: rotate(-15deg);
+
+  transform: rotate(-10deg);
 }
 
 .red {
