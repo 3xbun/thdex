@@ -26,17 +26,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-const activePage = ref('collection')
+const activePage = ref('')
 
 const select = (page) => {
   activePage.value = page
   router.push('/' + page)
+  console.log(router.currentRoute.value.path.substring(1));
 }
+
+onMounted(() => {
+  console.log(window.location.pathname.substring(1));
+  activePage.value = window.location.pathname.substring(1)
+})
 </script>
 
 <style scoped>
