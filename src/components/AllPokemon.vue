@@ -80,6 +80,7 @@ i {
   background-color: var(--dark);
   text-align: center;
   border-radius: .5em;
+  padding-bottom: 1em;
 }
 
 .nat_no {
