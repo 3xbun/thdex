@@ -7,6 +7,10 @@
         <span class="blue">D</span>ex
       </i>
     </h1>
+
+    <RouterLink to="/info">
+      <i class="fa-light fa-circle-info"></i>
+    </RouterLink>
   </header>
 </template>
 
@@ -29,5 +33,14 @@
 
 header {
   margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 1em;
+}
+
+.fa-circle-info {
+  font-size: 1.5em;
+  color: var(--gray)
 }
 </style>

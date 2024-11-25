@@ -9,9 +9,11 @@ import ExpansionView from './views/ExpansionView.vue'
 import FolderView from './views/FolderView.vue'
 import SearchView from './views/SearchView.vue'
 import SponsorView from './views/SponsorView.vue'
+import InfoView from './views/InfoView.vue';
 
 const routes = [
   { path: '/', component: CollectionView },
+  { path: '/info', component: InfoView },
   { path: '/collection', component: CollectionView },
   { path: '/expansion', component: ExpansionView },
   { path: '/folder', component: FolderView },
