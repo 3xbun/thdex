@@ -53,7 +53,7 @@ import Data from '../assets/Cards.json';
 const Collections = inject('Collections')
 
 const tcgTH = ref({
-  link: "",
+  link: "#",
   price: ""
 }
 )
