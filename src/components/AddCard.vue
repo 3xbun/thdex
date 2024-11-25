@@ -18,7 +18,7 @@
         <div class="tcg-th item">
           <img src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png" alt="tcgth-logo">
           <div class="store">
-            <p>TCGThailand</p>
+            <p>TCG Thailand</p>
           </div>
           <p>{{ tcgTH.price }}</p>
         </div>
@@ -105,7 +105,9 @@ onMounted(() => {
 
   axios.get(link).then(res => {
     const data = res.data.order_item_data.data
-    console.log(data);
+    // console.log(data.filter(item => {
+
+    // }));
     tcgTH.value.link = "https://www.tcgthailand.com/product/" + res.data.order_item_data.data[0].id;
     tcgTH.value.price = "฿" + res.data.order_item_data.data[0].price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   })
