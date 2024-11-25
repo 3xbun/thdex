@@ -6,8 +6,8 @@
 
   <ul class="pokemons">
     <li v-for="pokemon in Pokemon" :key="pokemon.nat_no" class="pokemon">
-      <img v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
-      <img v-else class="locked" :src="pokemon.image" alt="">
+      <img loading="lazy" v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
+      <img loading="lazy" v-else class="locked" :src="pokemon.image" alt="">
       <p>{{ pokemon.name }}</p>
       <p class="nat_no">#{{ pokemon.nat_no }}</p>
     </li>
