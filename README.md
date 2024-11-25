@@ -1,4 +1,4 @@
-![GitHub License](https://img.shields.io/github/package-json/version/3xbun/thdex) ![GitHub Tag](https://img.shields.io/github/v/tag/3xbun/thdex) ![Uptime](https://status.3xbun.com/api/badge/19/status)
+![GitHub License](https://img.shields.io/github/package-json/version/3xbun/thdex) ![Staus](https://img.shields.io/website?url=https%3A%2F%2Fthdex.pages.dev)
 
 # THDex
 
