@@ -28,7 +28,7 @@ h1 {
 .tag {
   position: absolute;
   top: 65%;
-  left: 20%;
+  left: 25%;
   padding: .2rem .2rem .1rem;
   border-radius: .2rem;
   background-color: #e40a1f;
