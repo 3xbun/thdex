@@ -14,13 +14,14 @@
         <div v-else class="btn">มีแล้ว {{ amt }} ใบ</div>
         <div class="btn" @click="addCard(true)">+</div>
       </div>
-      <a :href="tcgTH.link">
+      <a :href="tcgTH.link" target="_blank">
         <div class="tcg-th item">
           <img src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png" alt="tcgth-logo">
           <div class="store">
             <p>TCG Thailand</p>
           </div>
-          <p>{{ tcgTH.price }}</p>
+          <p v-if='tcgTH.price_low'>฿{{ tcgTH.price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</p>
+          <p v-else>-</p>
         </div>
       </a>
     </div>
@@ -39,6 +40,8 @@
         <p>{{ card.set_no }}</p>
       </div>
     </div>
+    <hr v-if="tcgTH.updated_at">
+    <p v-if="tcgTH.updated_at">ราคาการ์ดอัพเดทล่าสุดเมื่อ {{ tcgTH.updated_at }}</p>
   </div>
 </template>
 
@@ -105,11 +108,15 @@ onMounted(() => {
 
   axios.get(link).then(res => {
     const data = res.data.order_item_data.data
-    // console.log(data.filter(item => {
+    const tcgCard = data.filter(item => item.card_number == card.value.set_no)[0]
 
-    // }));
-    tcgTH.value.link = "https://www.tcgthailand.com/product/" + res.data.order_item_data.data[0].id;
-    tcgTH.value.price = "฿" + res.data.order_item_data.data[0].price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (tcgCard) {
+      tcgTH.value = tcgCard
+      tcgTH.value.link = "https://www.tcgthailand.com/product/" + tcgCard.id;
+    } else {
+      tcgTH.value.link = "https://www.tcgthailand.com/product?search=" + card.value.name;
+      tcgTH.value.price = "-"
+    }
   })
 })
 
