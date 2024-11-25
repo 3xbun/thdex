@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/3xbun/thdex/compare/v1.1.1...v1.2.0) (2024-11-25)
+
+
+### Features
+
+* pull card's price from TCGThailand (estimate) ([b34043f](https://github.com/3xbun/thdex/commit/b34043f55a409a9891ad0d3517da23ceda6aef87))
+
+
+
 ## [1.1.1](https://github.com/3xbun/thdex/compare/v1.1.0...v1.1.1) (2024-11-25)
 
 
