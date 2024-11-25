@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/3xbun/thdex/compare/v1.2.0...v1.2.1) (2024-11-25)
+
+
+### Bug Fixes
+
+* fix typo on TCG Thailand ([e3d4e45](https://github.com/3xbun/thdex/commit/e3d4e457ffee9af0d2f6aa922452ebcc3132693d))
+
+
+
 # [1.2.0](https://github.com/3xbun/thdex/compare/v1.1.1...v1.2.0) (2024-11-25)
 
 
