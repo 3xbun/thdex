@@ -20,10 +20,15 @@
 </script>
 
 <style scoped>
+h1 {
+  position: relative;
+  width: 100%;
+}
+
 .tag {
   position: absolute;
-  top: 2.9rem;
-  left: 5.5rem;
+  top: 65%;
+  left: 20%;
   padding: .2rem .2rem .1rem;
   border-radius: .2rem;
   background-color: #e40a1f;
@@ -32,7 +37,6 @@
   font-size: .35rem;
   line-height: .7rem;
   letter-spacing: .5px;
-
   transform: rotate(-10deg);
 }
 
@@ -59,5 +63,11 @@ header {
 .fa-circle-info {
   font-size: 1.5em;
   color: var(--gray)
+}
+
+@media screen and (min-width: 600px) {
+  .tag {
+    left: 15%;
+  }
 }
 </style>
