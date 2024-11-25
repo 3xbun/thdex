@@ -1,7 +1,7 @@
 {
   "name": "thdex",
   "private": true,
-  "version": "ALPHA-1.0.0",
+  "version": "ALPHA-1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
