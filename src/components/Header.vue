@@ -6,6 +6,7 @@
         <span class="white">h</span>
         <span class="blue">D</span>ex
       </i>
+      <span class="tag">ALPHA-1.0.0</span>
     </h1>
 
     <RouterLink to="/info">
@@ -19,6 +20,21 @@
 </script>
 
 <style scoped>
+.tag {
+  position: absolute;
+  top: 5em;
+  left: 8em;
+  padding: .5em .5em .3em;
+  border-radius: 4px;
+  background-color: #e40a1f;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+  color: #fff;
+  font-size: .2em;
+  line-height: .4em;
+  letter-spacing: .5px;
+  transform: rotate(-15deg);
+}
+
 .red {
   color: #e72c2f;
 }
