@@ -1,3 +1,12 @@
+# [1.4.0](https://github.com/3xbun/thdex/compare/v1.3.2...v1.4.0) (2024-11-25)
+
+
+### Features
+
+* add changelog in infopage ([8d286cd](https://github.com/3xbun/thdex/commit/8d286cdf51db1dc8f6904218a735b3364949ac80))
+
+
+
 ## [1.3.2](https://github.com/3xbun/thdex/compare/v1.3.1...v1.3.2) (2024-11-25)
 
 
