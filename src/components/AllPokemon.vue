@@ -6,17 +6,35 @@
 
   <ul class="pokemons">
     <li v-for="pokemon in Pokemon" :key="pokemon.nat_no" class="pokemon">
-      <img :src="pokemon.image" alt="">
+      <img v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
+      <img v-else class="locked" :src="pokemon.image" alt="">
       <p>{{ pokemon.name }}</p>
       <p class="nat_no">#{{ pokemon.nat_no }}</p>
     </li>
   </ul>
-  <!-- </div> -->
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import Data from '../assets/Pokemons.json';
+import { Cards } from '../assets/Cards.json';
+
+const Collections = inject("Collections")
+const collectedPokemon = computed(() => {
+
+  const pokemons = []
+
+  Collections.value.forEach(item => {
+    const nat_no = Cards.filter(card => card.id == item.cardID)[0].national_no
+    if (pokemons.includes(nat_no)) {
+      null
+    } else {
+      pokemons.push(nat_no)
+    }
+  })
+
+  return pokemons
+})
 
 const searchText = ref("")
 
@@ -66,5 +84,13 @@ i {
 
 .nat_no {
   color: var(--gray);
+}
+
+.locked {
+  filter: grayscale(100%) brightness(10%);
+}
+
+.unlock {
+  filter: none;
 }
 </style>
