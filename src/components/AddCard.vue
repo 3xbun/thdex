@@ -70,6 +70,11 @@ const addCard = (isAdd) => {
   }
 
   Collections.value.filter(card => card.cardID == props.cardID)[0].amt = amt.value
+
+  if (amt.value == 0) {
+    Collections.value = Collections.value.filter(card => card.cardID != props.cardID)
+  }
+
   localStorage.setItem("Collections", JSON.stringify(Collections.value))
 }
 
