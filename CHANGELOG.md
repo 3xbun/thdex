@@ -1,3 +1,12 @@
+## [1.3.2](https://github.com/3xbun/thdex/compare/v1.3.1...v1.3.2) (2024-11-25)
+
+
+### Bug Fixes
+
+* narbar active page not show when reload ([e78c5bf](https://github.com/3xbun/thdex/commit/e78c5bf495087c6355a4ad9173d28505c5e35428))
+
+
+
 ## [1.3.1](https://github.com/3xbun/thdex/compare/v1.3.0...v1.3.1) (2024-11-25)
 
 
