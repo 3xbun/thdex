@@ -1,12 +1,13 @@
 {
   "name": "thdex",
   "private": true,
-  "version": "0.0.0",
+  "version": "ALPHA-1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "commit": "npx cz && npx conventional-changelog-cli -i 'CHANGELOG.md' -s -t v -p angular"
   },
   "dependencies": {
     "axios": "^1.7.7",
