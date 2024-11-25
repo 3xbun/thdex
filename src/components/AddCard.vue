@@ -34,11 +34,13 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, inject, ref, onMounted } from 'vue';
 import Data from '../assets/Cards.json';
 
+const Collections = inject('Collections')
+
 const props = defineProps({
-  cardID: String,
+  cardID: String
 })
 
 const card = computed(
@@ -46,8 +48,18 @@ const card = computed(
 )
 
 const amt = ref(0)
+const isNew = ref(true)
 
 const addCard = (isAdd) => {
+
+  if (isNew.value) {
+    Collections.value.push({
+      cardID: props.cardID,
+      amt: 0
+    })
+
+    isNew.value = false
+  }
 
   if (isAdd) {
     amt.value += 1
@@ -56,7 +68,18 @@ const addCard = (isAdd) => {
       amt.value -= 1
     }
   }
+
+  Collections.value.filter(card => card.cardID == props.cardID)[0].amt = amt.value
+  localStorage.setItem("Collections", JSON.stringify(Collections.value))
 }
+
+onMounted(() => {
+  // Check if card is new
+  if (Collections.value.filter(card => card.cardID == props.cardID)[0]) {
+    amt.value = Collections.value.filter(card => card.cardID == props.cardID)[0].amt
+    isNew.value = false
+  }
+})
 
 </script>
 
