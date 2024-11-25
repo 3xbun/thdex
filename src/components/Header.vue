@@ -6,7 +6,7 @@
         <span class="white">h</span>
         <span class="blue">D</span>ex
       </i>
-      <span class="tag">ALPHA-1.0.0</span>
+      <span class="tag">{{ version }}</span>
     </h1>
 
     <RouterLink to="/info">
@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-
+import { version } from '../../package.json';
 </script>
 
 <style scoped>
