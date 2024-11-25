@@ -14,6 +14,15 @@
         <div v-else class="btn">มีแล้ว {{ amt }} ใบ</div>
         <div class="btn" @click="addCard(true)">+</div>
       </div>
+      <a :href="tcgTH.link">
+        <div class="tcg-th item">
+          <img src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png" alt="tcgth-logo">
+          <div class="store">
+            <p>TCGThailand</p>
+          </div>
+          <p>{{ tcgTH.price }}</p>
+        </div>
+      </a>
     </div>
     <hr>
     <div class="informations">
@@ -35,9 +44,16 @@
 
 <script setup>
 import { computed, inject, ref, onMounted } from 'vue';
+import axios from 'axios';
 import Data from '../assets/Cards.json';
 
 const Collections = inject('Collections')
+
+const tcgTH = ref({
+  link: "",
+  price: ""
+}
+)
 
 const props = defineProps({
   cardID: String
@@ -84,6 +100,15 @@ onMounted(() => {
     amt.value = Collections.value.filter(card => card.cardID == props.cardID)[0].amt
     isNew.value = false
   }
+
+  const link = `https://api.tcgthailand.com/api/v1/home/product_popular?page=1&search=${card.value.name}&filter_product=new&filter_category[]=%E0%B9%82%E0%B8%9B%E0%B9%80%E0%B8%81%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A3%E0%B8%94%E0%B8%94%E0%B8%B4%E0%B9%89%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%94%E0%B9%80%E0%B8%81%E0%B8%A1&filter_set_name=all&filter_rarity=all&filter_accessory=all&filter_set_card=all&filter_buy_list=false&filter_sell_list=true`
+
+  axios.get(link).then(res => {
+    const data = res.data.order_item_data.data
+    console.log(data);
+    tcgTH.value.link = "https://www.tcgthailand.com/product/" + res.data.order_item_data.data[0].id;
+    tcgTH.value.price = "฿" + res.data.order_item_data.data[0].price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  })
 })
 
 </script>
@@ -168,5 +193,28 @@ h4 {
 
 .item p:first-child {
   color: var(--gray);
+}
+
+.tcg-th {
+  display: flex;
+  margin-top: 1em;
+  height: fit-content;
+  padding: 1em;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.tcg-th img {
+  height: 2em;
+  width: auto;
+}
+
+.store {
+  width: 100%;
+}
+
+.store p {
+  color: var(--white) !important;
 }
 </style>
