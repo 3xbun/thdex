@@ -2,7 +2,8 @@ import { createApp } from 'vue'
 import { createWebHistory, createRouter } from 'vue-router'
 import './style.css'
 import App from './App.vue'
-
+import Skeleton from '@brayamvalero/vue3-skeleton'
+import '@brayamvalero/vue3-skeleton/dist/style.css'
 
 import CollectionView from './views/CollectionView.vue'
 import ExpansionView from './views/ExpansionView.vue'
@@ -26,4 +27,4 @@ const router = createRouter({
   routes,
 })
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(Skeleton).mount('#app')
