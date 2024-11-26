@@ -1,3 +1,19 @@
+# [1.6.0](https://github.com/3xbun/thdex/compare/v1.5.0...v1.6.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* fix condition on set_code_card ([59d02ae](https://github.com/3xbun/thdex/commit/59d02aedca9b1498ee04a8fff4a280a064659d71))
+* **remove refactoed code insince edge has a problem:** git push ([d00b6ea](https://github.com/3xbun/thdex/commit/d00b6eade061115ebf17d1c5edf91e03d5a5af18))
+* Unused code ([8f197e6](https://github.com/3xbun/thdex/commit/8f197e67b7435b53ab6e3e0d7aaed4ad4caa9757))
+
+
+### Features
+
+* update each card with TCG Thailand api ([6b22ff6](https://github.com/3xbun/thdex/commit/6b22ff6d2711e8a425d609207294ca231f4a2deb))
+
+
+
 # [1.5.0](https://github.com/3xbun/thdex/compare/v1.4.1...v1.5.0) (2024-11-26)
 
 
