@@ -6,6 +6,7 @@
 
   <ul class="cards" v-if="searchText != ''">
     <li v-for="Card in Cards" :key="Card.id" @click="selectCard(Card.id)">
+      {{ Card.id }}
       <Card :cardID="Card.id" />
     </li>
   </ul>
