@@ -32,7 +32,10 @@ const searchText = ref("")
 const Cards = computed(
   () => {
     let counter = 0
+    console.log(searchText.value);
     return Data.Cards.filter(card => {
+
+      console.log(card)
       if (card.name.startsWith(searchText.value)) {
         counter += 1
 
