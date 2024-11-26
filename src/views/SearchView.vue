@@ -6,8 +6,9 @@
 
   <ul class="cards" v-if="searchText != ''">
     <li v-for="Card in Cards" :key="Card.id" @click="selectCard(Card.id)">
-      {{ Card.id }}
-      <Card :cardID="Card.id" />
+      <img v-show="isLoaded" :src="'https://asia.pokemon-card.com/th/card-img/' + Card.id + '.png'" :alt="Card.cardID"
+        @load="onImageLoaded">
+      <Skeleton v-if="!isLoaded" containerClass="skeleton" childClass="skeleton-item" />
     </li>
   </ul>
 
@@ -24,6 +25,16 @@ import AddCard from '../components/AddCard.vue';
 
 import Card from '../components/Card.vue';
 
+const isLoaded = ref(false)
+
+const props = defineProps({
+  cardID: String
+})
+
+const onImageLoaded = () => {
+  isLoaded.value = true
+}
+
 const isAdd = ref(false)
 const cardID = ref("")
 
@@ -32,10 +43,7 @@ const searchText = ref("")
 const Cards = computed(
   () => {
     let counter = 0
-    console.log(searchText.value);
     return Data.Cards.filter(card => {
-
-      console.log(card)
       if (card.name.startsWith(searchText.value)) {
         counter += 1
 
@@ -114,5 +122,9 @@ li {
   width: 30%;
   display: flex;
   align-items: center;
+}
+
+img {
+  width: 100%;
 }
 </style>
