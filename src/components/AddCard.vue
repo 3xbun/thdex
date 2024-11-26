@@ -137,7 +137,6 @@ onMounted(() => {
   padding-top: 2em;
   padding-bottom: 15vh;
   background-color: rgba(32, 33, 36, 0.85);
-  border-radius: 2em;
   backdrop-filter: blur(1em);
 }
 
@@ -157,6 +156,7 @@ hr {
 }
 
 h4 {
+  justify-content: center;
   font-weight: normal;
   color: var(--gray);
   display: flex;
