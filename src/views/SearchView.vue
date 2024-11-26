@@ -7,7 +7,6 @@
   <ul class="cards" v-if="searchText != ''">
     <li v-for="Card in Cards" :key="Card.id" @click="selectCard(Card.id)">
       <Card :cardID="Card.id" />
-      <!-- <img loading="lazy" id="card" :src="Card.image" alt="" srcset=""> -->
     </li>
   </ul>
 
@@ -31,7 +30,20 @@ const cardID = ref("")
 const searchText = ref("")
 
 const Cards = computed(
-  () => Data.Cards.filter(card => card.name.startsWith(searchText.value))
+  () => {
+    let counter = 0
+    return Data.Cards.filter(card => {
+      if (card.name.startsWith(searchText.value)) {
+        counter += 1
+
+        console.log(counter);
+
+        if (counter <= 50) {
+          return card.name.startsWith(searchText.value)
+        }
+      }
+    })
+  }
 )
 
 const selectCard = (id) => {
@@ -92,10 +104,12 @@ i {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1em
+  gap: 1em;
 }
 
 li {
-  width: 30%
+  width: 30%;
+  display: flex;
+  align-items: center;
 }
 </style>
