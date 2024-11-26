@@ -88,7 +88,7 @@ i {
 }
 
 .locked {
-  filter: grayscale(100%) brightness(10%);
+  filter: grayscale(100%) brightness(10%) blur(3px);
 }
 
 .unlock {
