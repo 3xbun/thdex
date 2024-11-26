@@ -23,8 +23,6 @@ import { computed, ref } from 'vue';
 import Data from '../assets/Cards.json';
 import AddCard from '../components/AddCard.vue';
 
-import Card from '../components/Card.vue';
-
 const isLoaded = ref(false)
 
 const props = defineProps({
