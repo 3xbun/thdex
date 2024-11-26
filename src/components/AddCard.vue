@@ -42,7 +42,7 @@
       </div>
       <div class="item">
         <p>Identifier</p>
-        <p v-if="tcgTH.rarity">{{ tcgTH.set_code_card_number }}</p>
+        <p v-if="tcgTH.set_code_card_number">{{ tcgTH.set_code_card_number }}</p>
         <p v-else>n/a</p>
       </div>
     </div>
