@@ -36,7 +36,6 @@ const activePage = ref('')
 const select = (page) => {
   activePage.value = page
   router.push('/' + page)
-  console.log(router.currentRoute.value.path.substring(1));
 }
 
 onMounted(() => {
