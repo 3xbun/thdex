@@ -1,3 +1,19 @@
+# [1.5.0](https://github.com/3xbun/thdex/compare/v1.4.1...v1.5.0) (2024-11-26)
+
+
+### Bug Fixes
+
+* set name align bug ([985590a](https://github.com/3xbun/thdex/commit/985590a52482f5e56d35c49b1858d70f3ac968d9))
+
+
+### Performance Improvements
+
+* Add Skeleton for lazy load ([cf4880f](https://github.com/3xbun/thdex/commit/cf4880f29c846d999141df9a8b95535a6884c4e1))
+* lazy load image ([537ef39](https://github.com/3xbun/thdex/commit/537ef39695dc4aeb653f59ccbc87052c610fa5f1))
+* limit search result to 50 results ([0ad9b14](https://github.com/3xbun/thdex/commit/0ad9b14cf6a5fc73b43d2cc19b529dbaf308850b))
+
+
+
 ## [1.4.1](https://github.com/3xbun/thdex/compare/v1.4.0...v1.4.1) (2024-11-25)
 
 
