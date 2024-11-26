@@ -1,8 +1,9 @@
 <template>
-  <img v-show="isLoaded" :src="'https://asia.pokemon-card.com/th/card-img/' + props.cardID + '.png'" :alt="props.cardID"
+  <h1>Heloo</h1>
+  <!-- <img v-show="isLoaded" :src="'https://asia.pokemon-card.com/th/card-img/' + props.cardID + '.png'" :alt="props.cardID"
     @load="onImageLoaded">
   <Skeleton v-if="!isLoaded" containerClass="skeleton" childClass="skeleton-item" />
-  {{ porps.cardID }}
+  {{ porps.cardID }} -->
 </template>
 
 <script setup>
