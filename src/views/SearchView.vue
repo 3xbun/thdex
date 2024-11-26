@@ -36,8 +36,6 @@ const Cards = computed(
       if (card.name.startsWith(searchText.value)) {
         counter += 1
 
-        console.log(counter);
-
         if (counter <= 50) {
           return card.name.startsWith(searchText.value)
         }
