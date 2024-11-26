@@ -17,7 +17,6 @@
 </template>
 
 <script setup>
-
 import { computed, ref } from 'vue';
 import Data from '../assets/Cards.json';
 import AddCard from '../components/AddCard.vue';
