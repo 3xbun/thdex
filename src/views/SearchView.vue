@@ -62,6 +62,8 @@ const selectCard = (id) => {
   right: 0;
   max-width: 600px;
   overflow: scroll;
+  border-radius: 2em;
+  box-shadow: 0px -11px 20px -3px rgba(0, 0, 0, 0.75);
 }
 
 .fa-circle-xmark {
