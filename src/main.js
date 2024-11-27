@@ -4,6 +4,7 @@ import './style.css'
 import App from './App.vue'
 import Skeleton from '@brayamvalero/vue3-skeleton'
 import '@brayamvalero/vue3-skeleton/dist/style.css'
+import 'charts.css';
 
 import CollectionView from './views/CollectionView.vue'
 import ExpansionView from './views/ExpansionView.vue'
