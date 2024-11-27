@@ -13,6 +13,7 @@
   "dependencies": {
     "@brayamvalero/vue3-skeleton": "^0.0.32",
     "axios": "^1.7.7",
+    "charts.css": "^1.1.0",
     "concurrently": "^9.1.0",
     "marked": "^15.0.2",
     "vue": "^3.5.12",
