@@ -4,6 +4,7 @@
     <input type="text" placeholder="ค้นหาด้วยชื่อโปเกมอน" v-model="searchText">
   </div>
 
+  <NerdStats />
   <ul class="pokemons">
     <li v-for="pokemon in Pokemon" :key="pokemon.nat_no" class="pokemon">
       <img loading="lazy" v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
@@ -18,6 +19,8 @@
 import { computed, inject, ref } from 'vue';
 import Data from '../assets/Pokemons.json';
 import { Cards } from '../assets/Cards.json';
+
+import NerdStats from '../components/NerdStats.vue';
 
 const Collections = inject("Collections")
 const collectedPokemon = computed(() => {
