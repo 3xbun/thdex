@@ -7,21 +7,53 @@
 </template>
 
 <script setup>
-import { onMounted, provide, ref } from 'vue';
+import { computed, onMounted, provide, ref } from 'vue';
 import Header from './components/Header.vue';
 import NavBar from './components/NavBar.vue';
 
-import Data from './assets/Cards.json';
+import { Cards } from './assets/Cards.json';
+import { Pokemons } from './assets/Pokemons.json';
 import axios from 'axios';
 
-const Cards = Data.Cards
-
 const Collections = ref([])
+const stats = computed(() => {
+  const stat = {
+    caughted: 0,
+    totalPkm: Pokemons.length - 1,
+    ownedCard: 0,
+    value: 0
+  }
+
+  Collections.value.forEach(item => {
+    stat.value += item.price ? (item.price * item.amt) : 0;
+    stat.ownedCard += item.amt
+  });
+
+  const pokemons = []
+
+  Collections.value.forEach(item => {
+    const nat_no = Cards.filter(card => card.id == item.cardID)[0].national_no
+    if (pokemons.includes(nat_no)) {
+      null
+    } else {
+      pokemons.push(nat_no)
+    }
+  })
+
+  stat.caughted = pokemons.length
+  console.log(stat);
+
+  return stat
+})
 
 provide('Collections', Collections)
+provide('Stats', stats)
+
 onMounted(() => {
   const col = localStorage.getItem("Collections")
   const updateCol = []
+
+  Collections.value = JSON.parse(col)
 
   if (col) {
     JSON.parse(col).forEach(item => {
@@ -39,6 +71,7 @@ onMounted(() => {
           item.cardTCGID = "n/a"
           item.price = 0
         }
+
         updateCol.push(item)
       })
     })
