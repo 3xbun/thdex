@@ -40,6 +40,7 @@ const select = (page) => {
 
 onMounted(() => {
   activePage.value = window.location.pathname.substring(1)
+  activePage.value == '' ? activePage.value = 'collection' : activePage.value = activePage.value
 })
 </script>
 
