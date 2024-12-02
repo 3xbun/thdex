@@ -1,7 +1,6 @@
 <template>
   <div class="stats">
     <div class="text">
-
       <h3>โปเกมอนที่จับได้</h3>
       <p>{{ stats.caughted }} จาก {{ stats.totalPkm }}</p>
       <h3>การ์ดที่มี</h3>
@@ -37,18 +36,46 @@
 </template>
 
 <script setup>
+import { inject, onMounted } from 'vue';
 import { ref, computed } from 'vue';
+import Data from '../assets/Pokemons.json';
+import { Cards } from '../assets/Cards.json';
 
 const stats = ref({
-  caughted: 20,
-  totalPkm: 1024,
-  ownedCard: 99,
-  value: 20000
+  caughted: 0,
+  totalPkm: Data.Pokemons.length - 1,
+  ownedCard: 0,
+  value: 0
 })
 
 const percent = computed(() =>
   (stats.value.caughted / stats.value.totalPkm)
 )
+
+onMounted(() => {
+
+  const Collections = inject('Collections')
+  console.log(Collections.value);
+
+  Collections.value.forEach(item => {
+    stats.value.value += item.price ? (item.price * item.amt) : 0;
+    stats.value.ownedCard += item.amt
+  });
+
+
+  const pokemons = []
+
+  Collections.value.forEach(item => {
+    const nat_no = Cards.filter(card => card.id == item.cardID)[0].national_no
+    if (pokemons.includes(nat_no)) {
+      null
+    } else {
+      pokemons.push(nat_no)
+    }
+  })
+
+  stats.value.caughted = pokemons.length
+})
 </script>
 
 <style scoped>
