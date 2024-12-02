@@ -1,15 +1,18 @@
-# [1.6.0](https://github.com/3xbun/thdex/compare/v1.5.0...v1.6.0) (2024-11-26)
+# [1.7.0](https://github.com/3xbun/thdex/compare/v1.5.0...v1.7.0) (2024-12-02)
 
 
 ### Bug Fixes
 
 * fix condition on set_code_card ([59d02ae](https://github.com/3xbun/thdex/commit/59d02aedca9b1498ee04a8fff4a280a064659d71))
+* remove old icon ([ccf4ceb](https://github.com/3xbun/thdex/commit/ccf4cebae7480485cb1b7cc274638f7bd130a546))
 * **remove refactoed code insince edge has a problem:** git push ([d00b6ea](https://github.com/3xbun/thdex/commit/d00b6eade061115ebf17d1c5edf91e03d5a5af18))
-* Unused code ([8f197e6](https://github.com/3xbun/thdex/commit/8f197e67b7435b53ab6e3e0d7aaed4ad4caa9757))
+* root location not working on navbar ([4d717c3](https://github.com/3xbun/thdex/commit/4d717c3c7d73f9412b847c2a8db6823bd21019a9))
+* speaker too loud ([9f6b603](https://github.com/3xbun/thdex/commit/9f6b603c83db82cbc3267817d97b89e8912ee82d))
 
 
 ### Features
 
+* add nerdstat ([3b873ef](https://github.com/3xbun/thdex/commit/3b873ef2233b53b9e351f4b46995681f2e97808d))
 * update each card with TCG Thailand api ([6b22ff6](https://github.com/3xbun/thdex/commit/6b22ff6d2711e8a425d609207294ca231f4a2deb))
 
 
