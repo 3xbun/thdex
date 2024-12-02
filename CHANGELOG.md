@@ -1,4 +1,4 @@
-# [1.7.0](https://github.com/3xbun/thdex/compare/v1.5.0...v1.7.0) (2024-12-02)
+## [1.7.1](https://github.com/3xbun/thdex/compare/v1.5.0...v1.7.1) (2024-12-02)
 
 
 ### Bug Fixes
@@ -8,6 +8,7 @@
 * **remove refactoed code insince edge has a problem:** git push ([d00b6ea](https://github.com/3xbun/thdex/commit/d00b6eade061115ebf17d1c5edf91e03d5a5af18))
 * root location not working on navbar ([5d08aea](https://github.com/3xbun/thdex/commit/5d08aeaef8ee542f18813b2702c0361a297d172b))
 * speaker too loud ([9f6b603](https://github.com/3xbun/thdex/commit/9f6b603c83db82cbc3267817d97b89e8912ee82d))
+* using getprice function to get price from TCG Thailand ([e914534](https://github.com/3xbun/thdex/commit/e914534a8a2564e4e18ef178711433a7babfc86d))
 
 
 ### Features
