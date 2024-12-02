@@ -41,8 +41,6 @@ const stats = computed(() => {
   })
 
   stat.caughted = pokemons.length
-  console.log(stat);
-
   return stat
 })
 
