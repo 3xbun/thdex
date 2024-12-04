@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "version": "git cliff -o CHANGELOG.md && git cliff -o  public/CHANGELOG.md"
+    "cl": "git cliff -o CHANGELOG.md && git cliff -o  public/CHANGELOG.md && git add CHANGELOG.md public/CHANGELOG.md && git commit -m 'Update CHANGELOG.md' && git push"
   },
   "dependencies": {
     "@brayamvalero/vue3-skeleton": "^0.0.32",
