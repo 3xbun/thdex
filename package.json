@@ -1,13 +1,13 @@
 {
   "name": "thdex",
   "private": true,
-  "version": "1.8.1",
+  "version": "1.7.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "cm": "npx cz"
+    "version": "git cliff -o CHANGELOG.md && git cliff -o  public/CHANGELOG.md"
   },
   "dependencies": {
     "@brayamvalero/vue3-skeleton": "^0.0.32",
