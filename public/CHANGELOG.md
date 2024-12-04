@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [1.8.1] - 2024-12-04
+
+### 🐛 Bug Fixes
+
+- Fix InfoView
 
 ### ⚙️ Miscellaneous Tasks
 
