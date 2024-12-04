@@ -41,7 +41,10 @@ const searchText = ref("")
 const Cards = computed(
   () => {
     let counter = 0
-    return Data.Cards.filter(card => {
+    let results
+
+    // search with card's name
+    results = Data.Cards.filter(card => {
       if (card.name.startsWith(searchText.value)) {
         counter += 1
 
@@ -50,6 +53,23 @@ const Cards = computed(
         }
       }
     })
+
+    if (results.length > 0) {
+      return results
+    }
+
+    // Search with national ID
+    results = Data.Cards.filter(card => {
+      if (card.national_no == searchText.value) {
+        counter += 1
+
+        if (counter <= 50) {
+          return card.national_no == searchText.value
+        }
+      }
+    })
+
+    return results
   }
 )
 
