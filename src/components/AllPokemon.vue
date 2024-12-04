@@ -6,12 +6,14 @@
 
   <NerdStats />
   <ul class="pokemons">
-    <li v-for="pokemon in Pokemon" :key="pokemon.nat_no" class="pokemon">
-      <img loading="lazy" v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
-      <img loading="lazy" v-else class="locked" :src="pokemon.image" alt="">
-      <p>{{ pokemon.name }}</p>
-      <p class="nat_no">#{{ pokemon.nat_no }}</p>
-    </li>
+    <router-link v-for="pokemon in Pokemon" :key="pokemon.nat_no" :to="'/pokemon/' + pokemon.nat_no">
+      <li class="pokemon">
+        <img loading="lazy" v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
+        <img loading="lazy" v-else class="locked" :src="pokemon.image" alt="">
+        <p>{{ pokemon.name }}</p>
+        <p class="nat_no">#{{ pokemon.nat_no }}</p>
+      </li>
+    </router-link>
   </ul>
 </template>
 
@@ -47,6 +49,10 @@ const Pokemon = computed(
 </script>
 
 <style scoped>
+router-link {
+  width: 30%;
+}
+
 .searchBar {
   background-color: var(--dark);
   border-radius: .5em;
@@ -79,7 +85,7 @@ i {
 }
 
 .pokemon {
-  width: 30%;
+  /* width: 30%; */
   background-color: var(--dark);
   text-align: center;
   border-radius: .5em;
