@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "cm": "npx cz",
-    "cl": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && conventional-changelog -p angular -i './public/CHANGELOG.md' -s -r 0 && git add CHANGELOG.md public/CHANGELOG.md && git commit -m 'Update CHANGELOG.md' && git push"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && conventional-changelog -p angular -i './public/CHANGELOG.md' -s && git add CHANGELOG.md ./public/CHANGELOG.md && git commit -m 'Update CHANGELOG.md' && git push"
   },
   "dependencies": {
     "@brayamvalero/vue3-skeleton": "^0.0.32",
