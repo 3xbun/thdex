@@ -28,22 +28,35 @@
     <hr>
     <div class="informations">
       <div class="item">
-        <p>Artist</p>
-        <p>{{ card.illustrator }}</p>
+        <i class="fa-thin fa-pen-swirl"></i>
+        <div class="text">
+          <p>Artist</p>
+          <p>{{ card.illustrator }}</p>
+        </div>
       </div>
       <div class="item">
-        <p>Rarity</p>
-        <p v-if="tcgTH.rarity">{{ tcgTH.rarity }}</p>
-        <p v-else>n/a</p>
+        <i class="fa-thin fa-percent"></i>
+        <div class="text">
+          <p>Rarity</p>
+          <p v-if="tcgTH.rarity">{{ tcgTH.rarity }}</p>
+          <p v-else>n/a</p>
+        </div>
       </div>
       <div class="item">
-        <p>National Number</p>
-        <p>{{ card.national_no }}</p>
+        <i class="fa-thin fa-hashtag"></i>
+        <div class="text">
+          <p>National Number</p>
+          <p>{{ card.national_no }}</p>
+        </div>
+        <i class="fa-thin fa-chevron-right"></i>
       </div>
       <div class="item">
-        <p>Identifier</p>
-        <p v-if="tcgTH.set_code_card_number">{{ tcgTH.set_code_card_number }}</p>
-        <p v-else>n/a</p>
+        <i class="fa-thin fa-signature"></i>
+        <div class="text">
+          <p>Identifier</p>
+          <p v-if="tcgTH.set_code_card_number">{{ tcgTH.set_code_card_number }}</p>
+          <p v-else>n/a</p>
+        </div>
       </div>
     </div>
     <hr v-if="tcgTH.updated_at">
@@ -200,14 +213,32 @@ h4 {
 }
 
 .item {
+  display: flex;
+  align-items: center;
+  gap: 1em;
   width: 100%;
   background-color: var(--dark);
-  padding: .5em;
+  padding: .5em 1em;
   border-radius: .5em;
+}
+
+.item i {
+  font-size: 2em;
+  width: 1em;
+  text-align: center;
 }
 
 .item p:first-child {
   color: var(--gray);
+}
+
+.text {
+  width: 100%;
+}
+
+.fa-chevron-right {
+  color: var(--gray);
+  font-size: 1.5em !important;
 }
 
 .tcg-th {
