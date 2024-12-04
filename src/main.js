@@ -12,6 +12,7 @@ import FolderView from './views/FolderView.vue'
 import SearchView from './views/SearchView.vue'
 import SponsorView from './views/SponsorView.vue'
 import InfoView from './views/InfoView.vue';
+import PokemonView from './views/PokemonView.vue';
 
 const routes = [
   { path: '/', component: CollectionView },
@@ -21,6 +22,7 @@ const routes = [
   { path: '/folder', component: FolderView },
   { path: '/search', component: SearchView },
   { path: '/sponsor', component: SponsorView },
+  { path: '/pokemon/:national_no', component: PokemonView }
 ]
 
 const router = createRouter({

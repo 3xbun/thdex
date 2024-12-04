@@ -48,7 +48,9 @@
           <p>National Number</p>
           <p>{{ card.national_no }}</p>
         </div>
-        <i class="fa-thin fa-chevron-right"></i>
+        <router-link :to="'/pokemon/' + card.national_no">
+          <i class="fa-thin fa-chevron-right"></i>
+        </router-link>
       </div>
       <div class="item">
         <i class="fa-thin fa-signature"></i>
@@ -70,6 +72,7 @@ import axios from 'axios';
 import Data from '../assets/Cards.json';
 
 const Collections = inject('Collections')
+const searchText = inject('searchText')
 
 const tcgTH = ref({
   link: "#",
