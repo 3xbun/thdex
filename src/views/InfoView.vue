@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Changelog</h1>
     <div id="changelog"></div>
     <hr>
     <p>
@@ -38,6 +37,7 @@ onMounted(() => {
 div {
   text-align: center;
   color: var(--gray);
+  padding-bottom: 2em;
 }
 
 hr {
