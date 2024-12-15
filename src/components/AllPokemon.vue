@@ -8,7 +8,8 @@
   <ul class="pokemons">
     <router-link v-for="pokemon in Pokemon" :key="pokemon.nat_no" :to="'/pokemon/' + pokemon.nat_no">
       <li class="pokemon">
-        <img loading="lazy" v-if="collectedPokemon.includes(pokemon.nat_no)" class="unlock" :src="pokemon.image" alt="">
+        <img loading="lazy" v-if="collectedPokemon.includes(String(pokemon.nat_no))" class="unlock" :src="pokemon.image"
+          alt="">
         <img loading="lazy" v-else class="locked" :src="pokemon.image" alt="">
         <p>{{ pokemon.name }}</p>
         <p class="nat_no">#{{ pokemon.nat_no }}</p>
@@ -37,6 +38,8 @@ const collectedPokemon = computed(() => {
       pokemons.push(nat_no)
     }
   })
+
+  console.log(pokemons);
 
   return pokemons
 })
