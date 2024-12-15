@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.3] - 2024-12-15
+
+### 💼 Other
+
+- Add git-cliff
+
+## [1.8.2] - 2024-12-15
+
+### 🐛 Bug Fixes
+
+- Unlock pokemon bug
+
 ## [1.8.1] - 2024-12-04
 
 ### 🐛 Bug Fixes
