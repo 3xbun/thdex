@@ -1,43 +1,26 @@
 <template>
-  <div v-if="setCode">
-    <header>
-      <div class="image">
-        <img class="expHeader" :src="setImage" alt="" />
-      </div>
-      <h1>{{ setName }}</h1>
-    </header>
-    <img
-      src="https://assets-v2.lottiefiles.com/a/ae47ca2c-bd64-11ef-8a23-cfbc45d0a788/HgjuHFgI6d.gif"
-      alt="loading"
-      class="loading"
-      v-if="isLoading"
-    />
-    <div>
-      <ul class="cards">
-        <li
-          v-for="card in Cards"
-          :key="card.link"
-          @click="selectCard(card.link)"
-        >
-          <img :src="card.img" :alt="card.img" />
-        </li>
-      </ul>
-
-      <div class="wrapper" v-if="isAdd">
-        <i
-          class="fa-duotone fa-solid fa-circle-xmark"
-          @click="isAdd = false"
-        ></i>
-        <AddCard :card="card" />
-      </div>
-    </div>
+  <div>
+    <ul class="expansions">
+      {{
+        setCode
+      }}
+      <li v-for="exp in Expansions" :key="exp.expansionCode">
+        <router-link :to="'/expansion/' + exp.expansionCode">
+          <div class="expImage">
+            <img :src="exp.expansionImage" alt="" />
+          </div>
+          <div class="expTitle">
+            <p>{{ exp.expansionTitle }}</p>
+          </div>
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script setup>
 import { computed, onMounted, ref } from "vue";
 import { Expansions } from "../assets/Expansions.json";
-import AddCard from "../components/AddCard.vue";
 
 import { useRoute } from "vue-router";
 import axios from "axios";
@@ -48,28 +31,6 @@ const Cards = ref([]);
 const isLoading = ref(true);
 const isAdd = ref(false);
 const card = ref("");
-
-const setName = computed(() => {
-  return Expansions.find((expansion) => expansion.expansionCode == setCode)
-    .expansionTitle;
-});
-
-const setImage = computed(() => {
-  return Expansions.find((expansion) => expansion.expansionCode == setCode)
-    .expansionImage;
-});
-
-const selectCard = (link) => {
-  axios
-    .post("https://n8n.3xbun.com/webhook/card", {
-      link: link,
-    })
-    .then((res) => {
-      card.value = res.data[0];
-      card.value.Link = link;
-      isAdd.value = true;
-    });
-};
 
 onMounted(() => {
   axios
@@ -114,10 +75,6 @@ header {
   font-size: 2em;
   opacity: 0.8;
   z-index: 99;
-}
-
-h1 {
-  text-align: center;
 }
 
 .expansions {

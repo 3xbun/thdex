@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ pokemonName }}การ์ด</h1>
+    <h1>การ์ดของ{{ pokemonName }}</h1>
 
     <img
       src="https://assets-v2.lottiefiles.com/a/ae47ca2c-bd64-11ef-8a23-cfbc45d0a788/HgjuHFgI6d.gif"

@@ -12,9 +12,10 @@ import moment from "moment";
 import Header from "./components/Header.vue";
 import NavBar from "./components/NavBar.vue";
 
-import { Cards } from "./assets/Cards.json";
 import { Pokemons } from "./assets/Pokemons.json";
 import axios from "axios";
+
+const tcgData = ref([]);
 
 const Collections = ref([]);
 const stats = computed(() => {
@@ -47,27 +48,21 @@ const stats = computed(() => {
 });
 
 const getPrice = (card, item) => {
-  const today = moment().format("DD-MM-YYYY");
-
   const link = `https://api.tcgthailand.com/api/v1/home/product_popular?page=1&search=${card.name}&filter_product=new&filter_category[]=%E0%B9%82%E0%B8%9B%E0%B9%80%E0%B8%81%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A3%E0%B8%94%E0%B8%94%E0%B8%B4%E0%B9%89%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%94%E0%B9%80%E0%B8%81%E0%B8%A1&filter_set_name=all&filter_rarity=all&filter_accessory=all&filter_set_card=all&filter_buy_list=false&filter_sell_list=true`;
 
-  if (item.lastUpdate == today) {
-    return;
-  } else {
-    axios.get(link).then((res) => {
-      const data = res.data.order_item_data.data;
-      const tcgCard = data.filter((item) => item.card_number == card.set_no)[0];
+  axios.get(link).then((res) => {
+    const data = res.data.order_item_data.data;
+    const tcgCard = data.filter((item) => item.card_number == card.set_no)[0];
 
-      if (tcgCard) {
-        item.cardTCGID = tcgCard.set_code_card_number || "n/a";
-        item.price = tcgCard.price_low || 0;
-        item.lastUpdate = today;
-      } else {
-        item.cardTCGID = "n/a";
-        item.price = 0;
-      }
-    });
-  }
+    if (tcgCard) {
+      item.cardTCGID = tcgCard.set_code_card_number || "n/a";
+      item.price = tcgCard.price_low || 0;
+      item.lastUpdate = today;
+    } else {
+      item.cardTCGID = "n/a";
+      item.price = 0;
+    }
+  });
 
   localStorage.setItem("Collections", JSON.stringify(Collections.value));
 };
@@ -85,6 +80,17 @@ onMounted(() => {
   } else {
     localStorage.setItem("Collections", JSON.stringify(Collections.value));
   }
+
+  // GET TCG TH DATA
+  axios
+    .get("https://api.tcgthailand.app/v1/public/pokemon-tcg-th/products", {
+      headers: {
+        "x-api-key": import.meta.env.VITE_TCG_TH_API,
+      },
+    })
+    .then((res) => {
+      localStorage.setItem("tcgData", JSON.stringify(res.data));
+    });
 });
 </script>
 

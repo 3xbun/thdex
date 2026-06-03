@@ -3,13 +3,15 @@
     <img :src="props.card.Image" alt="" />
     <div v-if="card" class="title">
       <h1>{{ props.card.Title }}</h1>
-      <h4>
+      <h4 class="setName">
         <img
           src="https://cdn.countryflags.com/thumbs/thailand/flag-400.png"
           alt=""
           class="flag"
         />
-        {{ props.card.setName }}
+        <router-link :to="'/expansion/' + props.card.setCode">
+          {{ props.card.setName }}
+        </router-link>
       </h4>
     </div>
     <div class="menus">
@@ -19,23 +21,28 @@
         <div v-else class="btn">มีแล้ว {{ amt }} ใบ</div>
         <div class="btn" @click="addCard(true)">+</div>
       </div>
-      <!-- <a :href="tcgTH.link" target="_blank">
+      <a
+        :href="'https://www.tcgthailand.com/product/' + tcgDataCard.productId"
+        target="_blank"
+      >
         <div class="tcg-th item">
           <img
-            src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png"
+            src="https://www.tcgthailand.com/image/logo/logo-desktop.webp"
             alt="tcgth-logo"
           />
           <div class="store">
             <p>TCG Thailand</p>
           </div>
-          <p v-if="tcgTH.price_low">
+          <p v-if="props.card.price">
             ฿{{
-              tcgTH.price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }}
+              (props.card.price / 100)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }}.-
           </p>
           <p v-else>-</p>
         </div>
-      </a> -->
+      </a>
     </div>
     <hr />
     <div class="informations">
@@ -51,7 +58,7 @@
         <i class="fa-thin fa-percent"></i>
         <div class="text">
           <p>Rarity</p>
-          <p v-if="tcgTH.rarity">{{ tcgTH.rarity }}</p>
+          <p v-if="tcgDataCard.rarity">{{ tcgDataCard.rarity }}</p>
           <p v-else>n/a</p>
         </div>
       </div>
@@ -69,21 +76,25 @@
         <i class="fa-thin fa-signature"></i>
         <div class="text">
           <p>Identifier</p>
-          {{ props.card.setCode }} {{ props.card.cardNo }}
+          {{ props.card.setCode }} T {{ props.card.cardNo }}
         </div>
       </div>
     </div>
-    <hr v-if="tcgTH.updated_at" />
-    <p v-if="tcgTH.updated_at">
-      ราคาการ์ดอัพเดทล่าสุดเมื่อ {{ tcgTH.updated_at }}
+    <hr />
+    <p>
+      ราคาการ์ดอัพเดทล่าสุดเมื่อ
+      {{ tcgData.meta.version.replace("T", " ") }}
     </p>
   </div>
 </template>
 
 <script setup>
+import axios from "axios";
 import { inject, onMounted, ref } from "vue";
 
 const Collections = inject("Collections");
+const tcgData = JSON.parse(localStorage.getItem("tcgData"));
+const tcgDataCard = ref("");
 
 const tcgTH = ref({
   link: "#",
@@ -144,6 +155,31 @@ onMounted(() => {
     )[0].amt;
     isNew.value = false;
   }
+
+  // Find Card on TCG TH
+  const tcgData = JSON.parse(localStorage.getItem("tcgData"));
+  tcgDataCard.value = tcgData.data.filter(
+    (card) =>
+      `${card.setCode} ${card.cardNumber}` ==
+      `${props.card.setCode} T ${props.card.cardNo}`,
+  )[0];
+
+  if (tcgDataCard.value) {
+    axios
+      .get(
+        "https://api.tcgthailand.app/v1/public/pokemon-tcg-th/market-prices?productId=" +
+          tcgDataCard.value.productId,
+        {
+          headers: {
+            "x-api-key": import.meta.env.VITE_TCG_TH_API,
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res.data);
+        props.card.price = res.data.data[0].price;
+      });
+  }
 });
 </script>
 
@@ -185,6 +221,11 @@ h4 {
 
 .title {
   text-align: center;
+}
+
+.setName {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .menus {

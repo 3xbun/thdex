@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap");
 
 * {
   padding: 0;
@@ -55,7 +55,7 @@ a {
 #changelog h2 {
   margin-top: 1em;
   border-bottom: 1px solid var(--gray);
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 .skeleton {
@@ -67,5 +67,9 @@ a {
 
 .skeleton-item {
   background-color: var(--dark) !important;
-  border-radius: .5em !important;
+  border-radius: 0.5em !important;
+}
+
+img {
+  width: 100%;
 }

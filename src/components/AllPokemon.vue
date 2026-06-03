@@ -34,7 +34,6 @@
 <script setup>
 import { computed, inject, ref } from "vue";
 import Data from "../assets/Pokemons.json";
-import { Cards } from "../assets/Cards.json";
 
 import NerdStats from "../components/NerdStats.vue";
 

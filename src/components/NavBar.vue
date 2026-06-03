@@ -5,7 +5,7 @@
         <i class="fa-duotone fa-solid fa-cards-blank"></i>
         คอลเลคชั่น
       </li>
-      <li @click="select('expansion')" :class="{ active: activePage == 'expansion' }">
+      <li @click="select('expansions')" :class="{ active: activePage == 'expansions' }">
         <i class="fa-duotone fa-solid fa-boxes-stacked"></i>
         ชุดการ์ด
       </li>
