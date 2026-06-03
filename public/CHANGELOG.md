@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [2.0.0] - 2026-06-04
 
+### 🚀 Features
+
+- Fetch Realtime Card's Data
+- Using New TCG TH API
+- Expansions Page is Now Working
+
 ## [1.8.3] - 2024-12-15
 
 ### 💼 Other
