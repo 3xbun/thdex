@@ -1,10 +1,15 @@
 <template>
   <div class="addCard">
-    <img :src="card.image" alt="">
-    <div class="title">
-      <h1>{{ card.name }}</h1>
+    <img :src="props.card.Image" alt="" />
+    <div v-if="card" class="title">
+      <h1>{{ props.card.Title }}</h1>
       <h4>
-        <img src="https://cdn.countryflags.com/thumbs/thailand/flag-400.png" alt="" class="flag"> {{ card.set_name }}
+        <img
+          src="https://cdn.countryflags.com/thumbs/thailand/flag-400.png"
+          alt=""
+          class="flag"
+        />
+        {{ props.card.setName }}
       </h4>
     </div>
     <div class="menus">
@@ -14,24 +19,32 @@
         <div v-else class="btn">มีแล้ว {{ amt }} ใบ</div>
         <div class="btn" @click="addCard(true)">+</div>
       </div>
-      <a :href="tcgTH.link" target="_blank">
+      <!-- <a :href="tcgTH.link" target="_blank">
         <div class="tcg-th item">
-          <img src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png" alt="tcgth-logo">
+          <img
+            src="https://www.tcgthailand.com/_nuxt/img/TCG.9f64531.png"
+            alt="tcgth-logo"
+          />
           <div class="store">
             <p>TCG Thailand</p>
           </div>
-          <p v-if='tcgTH.price_low'>฿{{ tcgTH.price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</p>
+          <p v-if="tcgTH.price_low">
+            ฿{{
+              tcgTH.price_low.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            }}
+          </p>
           <p v-else>-</p>
         </div>
-      </a>
+      </a> -->
     </div>
-    <hr>
+    <hr />
     <div class="informations">
       <div class="item">
         <i class="fa-thin fa-pen-swirl"></i>
         <div class="text">
           <p>Artist</p>
-          <p>{{ card.illustrator }}</p>
+          <p v-if="card.artist">{{ props.card.artist }}</p>
+          <p v-else>n/a</p>
         </div>
       </div>
       <div class="item">
@@ -46,9 +59,9 @@
         <i class="fa-thin fa-hashtag"></i>
         <div class="text">
           <p>National Number</p>
-          <p>{{ card.national_no }}</p>
+          <p>{{ props.card.natNo }}</p>
         </div>
-        <router-link :to="'/pokemon/' + card.national_no">
+        <router-link :to="'/pokemon/' + props.card.natNo">
           <i class="fa-thin fa-chevron-right"></i>
         </router-link>
       </div>
@@ -56,92 +69,63 @@
         <i class="fa-thin fa-signature"></i>
         <div class="text">
           <p>Identifier</p>
-          <p v-if="tcgTH.set_code_card_number">{{ tcgTH.set_code_card_number }}</p>
-          <p v-else>n/a</p>
+          {{ props.card.setCode }} {{ props.card.cardNo }}
         </div>
       </div>
     </div>
-    <hr v-if="tcgTH.updated_at">
-    <p v-if="tcgTH.updated_at">ราคาการ์ดอัพเดทล่าสุดเมื่อ {{ tcgTH.updated_at }}</p>
+    <hr v-if="tcgTH.updated_at" />
+    <p v-if="tcgTH.updated_at">
+      ราคาการ์ดอัพเดทล่าสุดเมื่อ {{ tcgTH.updated_at }}
+    </p>
   </div>
 </template>
 
 <script setup>
-import { computed, inject, ref, onMounted } from 'vue';
-import axios from 'axios';
-import Data from '../assets/Cards.json';
+import { inject, ref } from "vue";
 
-const Collections = inject('Collections')
-const searchText = inject('searchText')
+const Collections = inject("Collections");
 
 const tcgTH = ref({
   link: "#",
-  price: ""
-}
-)
+  price: "",
+});
 
 const props = defineProps({
-  cardID: String
-})
+  card: Object,
+});
 
-const card = computed(
-  () => Data.Cards.filter(card => card.id == props.cardID)[0]
-)
-
-const amt = ref(0)
-const isNew = ref(true)
+const amt = ref(0);
+const isNew = ref(true);
 
 const addCard = (isAdd) => {
-
   if (isNew.value) {
     Collections.value.push({
       cardID: props.cardID,
-      amt: 0
-    })
+      amt: 0,
+    });
 
-    isNew.value = false
+    isNew.value = false;
   }
 
   if (isAdd) {
-    amt.value += 1
+    amt.value += 1;
   } else {
     if (amt.value > 0) {
-      amt.value -= 1
+      amt.value -= 1;
     }
   }
 
-  Collections.value.filter(card => card.cardID == props.cardID)[0].amt = amt.value
+  Collections.value.filter((card) => card.cardID == props.cardID)[0].amt =
+    amt.value;
 
   if (amt.value == 0) {
-    Collections.value = Collections.value.filter(card => card.cardID != props.cardID)
+    Collections.value = Collections.value.filter(
+      (card) => card.cardID != props.cardID,
+    );
   }
 
-  localStorage.setItem("Collections", JSON.stringify(Collections.value))
-}
-
-onMounted(() => {
-  // Check if card is new
-  if (Collections.value.filter(card => card.cardID == props.cardID)[0]) {
-    amt.value = Collections.value.filter(card => card.cardID == props.cardID)[0].amt
-    isNew.value = false
-  }
-
-  const link = `https://api.tcgthailand.com/api/v1/home/product_popular?page=1&search=${card.value.name}&filter_product=new&filter_category[]=%E0%B9%82%E0%B8%9B%E0%B9%80%E0%B8%81%E0%B8%A1%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%A3%E0%B8%94%E0%B8%94%E0%B8%B4%E0%B9%89%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%94%E0%B9%80%E0%B8%81%E0%B8%A1&filter_set_name=all&filter_rarity=all&filter_accessory=all&filter_set_card=all&filter_buy_list=false&filter_sell_list=true`
-
-  axios.get(link).then(res => {
-    const data = res.data.order_item_data.data
-    const tcgCard = data.filter(item => item.card_number == card.value.set_no)[0]
-
-    if (tcgCard) {
-      tcgTH.value = tcgCard
-      tcgTH.value.link = "https://www.tcgthailand.com/product/" + tcgCard.id;
-    } else {
-      tcgTH.value.link = "https://www.tcgthailand.com/product?search=" + card.value.name;
-      tcgTH.value.price = "-"
-    }
-  })
-})
-
+  localStorage.setItem("Collections", JSON.stringify(Collections.value));
+};
 </script>
 
 <style scoped>
@@ -177,7 +161,7 @@ h4 {
   color: var(--gray);
   display: flex;
   align-items: center;
-  gap: .5em;
+  gap: 0.5em;
 }
 
 .title {
@@ -193,15 +177,15 @@ h4 {
   width: 100%;
   justify-content: space-around;
   font-size: 1.5em;
-  gap: .5em;
+  gap: 0.5em;
 }
 
 .owned .btn {
   flex-basis: 20%;
   background-color: var(--dark);
   text-align: center;
-  padding: .5em;
-  border-radius: .5em;
+  padding: 0.5em;
+  border-radius: 0.5em;
 }
 
 .btn:nth-child(2) {
@@ -221,8 +205,8 @@ h4 {
   gap: 1em;
   width: 100%;
   background-color: var(--dark);
-  padding: .5em 1em;
-  border-radius: .5em;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
 }
 
 .item i {

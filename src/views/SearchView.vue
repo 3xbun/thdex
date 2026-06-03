@@ -1,83 +1,99 @@
 <template>
   <div class="searchBar">
-    <i class="fa-light fa-magnifying-glass"></i>
-    <input type="text" placeholder="ค้นหาด้วยชื่อโปเกมอน" v-model="searchText">
+    <div class="searchItem">
+      <i class="fa-light fa-magnifying-glass"></i>
+      <input
+        type="text"
+        placeholder="ค้นหาด้วยชื่อโปเกมอน"
+        v-model="searchText"
+        @keydown.enter="searchCards()"
+      />
+    </div>
+
+    <p class="btn" @click="searchCards()">ค้นหา</p>
   </div>
 
-  <ul class="cards" v-if="searchText != ''">
-    <li v-for="Card in Cards" :key="Card.id" @click="selectCard(Card.id)">
-      <img v-show="isLoaded" :src="'https://asia.pokemon-card.com/th/card-img/' + Card.id + '.png'" :alt="Card.cardID"
-        @load="onImageLoaded">
-      <Skeleton v-if="!isLoaded" containerClass="skeleton" childClass="skeleton-item" />
+  <!-- {{ Cards }} -->
+  <img
+    src="https://assets-v2.lottiefiles.com/a/ae47ca2c-bd64-11ef-8a23-cfbc45d0a788/HgjuHFgI6d.gif"
+    alt="loading"
+    class="loading"
+    v-if="isLoading"
+  />
+  <ul
+    class="cards"
+    v-if="Cards.length > 0 && searchText != '' && isLoading == false"
+  >
+    <li
+      v-for="card in Cards"
+      :key="card.link"
+      @click="selectCard(card.link, card.img)"
+    >
+      <img
+        v-show="isLoaded"
+        :src="card.img"
+        :alt="card.link"
+        @load="onImageLoaded"
+      />
+      <Skeleton
+        v-if="!isLoaded"
+        containerClass="skeleton"
+        childClass="skeleton-item"
+      />
     </li>
   </ul>
 
   <div class="wrapper" v-if="isAdd">
     <i class="fa-duotone fa-solid fa-circle-xmark" @click="isAdd = false"></i>
-    <AddCard :cardID="cardID" />
+    <AddCard :card="card" />
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-import Data from '../assets/Cards.json';
-import AddCard from '../components/AddCard.vue';
+import { computed, ref } from "vue";
+// import Data from "../assets/Cards.json";
+import AddCard from "../components/AddCard.vue";
+import axios from "axios";
 
-const isLoaded = ref(false)
+const Cards = ref([]);
+const isLoaded = ref(false);
+const isLoading = ref(false);
 
-const props = defineProps({
-  cardID: String
-})
+const card = ref({});
 
 const onImageLoaded = () => {
-  isLoaded.value = true
-}
+  isLoaded.value = true;
+};
 
-const isAdd = ref(false)
-const cardID = ref("")
+const isAdd = ref(false);
+const selectedCardLink = ref("");
+const selectedCardImg = ref("");
 
-const searchText = ref("")
+const searchText = ref("");
 
-const Cards = computed(
-  () => {
-    let counter = 0
-    let results
-
-    // search with card's name
-    results = Data.Cards.filter(card => {
-      if (card.name.startsWith(searchText.value)) {
-        counter += 1
-
-        if (counter <= 50) {
-          return card.name.startsWith(searchText.value)
-        }
-      }
+const selectCard = (link, img) => {
+  axios
+    .post("https://n8n.3xbun.com/webhook/card", {
+      link: link,
     })
+    .then((res) => {
+      card.value = res.data[0];
+      isAdd.value = true;
+    });
+};
 
-    if (results.length > 0) {
-      return results
-    }
-
-    // Search with national ID
-    results = Data.Cards.filter(card => {
-      if (card.national_no == searchText.value) {
-        counter += 1
-
-        if (counter <= 50) {
-          return card.national_no == searchText.value
-        }
-      }
+const searchCards = () => {
+  isLoading.value = true;
+  Cards.value = [];
+  axios
+    .post("https://n8n.3xbun.com/webhook/cards/search", {
+      keyword: searchText.value,
     })
-
-    return results
-  }
-)
-
-const selectCard = (id) => {
-  isAdd.value = true
-  cardID.value = id
-}
-
+    .then((res) => {
+      Cards.value = res.data;
+      isLoading.value = false;
+    });
+};
 </script>
 
 <style scoped>
@@ -98,20 +114,45 @@ const selectCard = (id) => {
 .fa-circle-xmark {
   position: absolute;
   right: 1em;
-  top: .5em;
+  top: 0.5em;
   font-size: 2em;
-  opacity: .8;
+  opacity: 0.8;
   z-index: 99;
 }
 
+.loading {
+  width: 15%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .searchBar {
-  background-color: var(--dark);
-  border-radius: .5em;
-  padding: .5em;
   display: flex;
-  gap: .5em;
-  align-items: center;
+  gap: 0.5em;
+  width: 100%;
   margin-bottom: 1em;
+  align-items: center;
+}
+
+.searchItem {
+  background-color: var(--dark);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  width: 100%;
+}
+
+p.btn {
+  width: 10%;
+  background-color: var(--dark);
+  border-radius: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+  cursor: pointer;
 }
 
 input {
