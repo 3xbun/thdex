@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { inject, ref } from "vue";
+import { inject, onMounted, ref } from "vue";
 
 const Collections = inject("Collections");
 
@@ -100,7 +100,10 @@ const isNew = ref(true);
 const addCard = (isAdd) => {
   if (isNew.value) {
     Collections.value.push({
-      cardID: props.cardID,
+      cardID: `${props.card.setCode} ${props.card.cardNo}`,
+      natNo: props.card.natNo,
+      img: props.card.Image,
+      link: props.card.Link,
       amt: 0,
     });
 
@@ -115,17 +118,33 @@ const addCard = (isAdd) => {
     }
   }
 
-  Collections.value.filter((card) => card.cardID == props.cardID)[0].amt =
-    amt.value;
+  Collections.value.filter(
+    (card) => card.cardID == `${props.card.setCode} ${props.card.cardNo}`,
+  )[0].amt = amt.value;
 
   if (amt.value == 0) {
     Collections.value = Collections.value.filter(
-      (card) => card.cardID != props.cardID,
+      (card) => card.cardID != `${props.card.setCode} ${props.card.cardNo}`,
     );
+    isNew.value = true;
   }
 
   localStorage.setItem("Collections", JSON.stringify(Collections.value));
 };
+
+onMounted(() => {
+  // Check if card is new
+  if (
+    Collections.value.filter(
+      (card) => card.cardID == `${props.card.setCode} ${props.card.cardNo}`,
+    )[0]
+  ) {
+    amt.value = Collections.value.filter(
+      (card) => card.cardID == `${props.card.setCode} ${props.card.cardNo}`,
+    )[0].amt;
+    isNew.value = false;
+  }
+});
 </script>
 
 <style scoped>

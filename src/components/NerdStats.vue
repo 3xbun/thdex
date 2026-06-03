@@ -5,8 +5,8 @@
       <p>{{ stats.caughted }} จาก {{ stats.totalPkm }}</p>
       <h3>การ์ดที่มี</h3>
       <p>{{ stats.ownedCard }}</p>
-      <h3>ราคารวม</h3>
-      <p>฿{{ stats.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</p>
+      <!-- <h3>ราคารวม</h3>
+      <p>฿{{ stats.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}</p> -->
     </div>
 
     <div class="charts">
@@ -14,9 +14,13 @@
       <table class="charts-css pie">
         <tbody>
           <tr>
-            <td :style="{
-              '--start': 0.0, '--end': percent, '--color': 'white'
-            }"></td>
+            <td
+              :style="{
+                '--start': 0.0,
+                '--end': percent,
+                '--color': 'white',
+              }"
+            ></td>
           </tr>
         </tbody>
       </table>
@@ -24,10 +28,7 @@
       <table class="charts-css pie black-circle">
         <tbody>
           <tr>
-            <td style="
-            --start: 0.0; 
-            --end: 100; 
-            "></td>
+            <td style="--start: 0; --end: 100"></td>
           </tr>
         </tbody>
       </table>
@@ -36,14 +37,12 @@
 </template>
 
 <script setup>
-import { inject, onMounted } from 'vue';
-import { computed } from 'vue';
+import { inject, onMounted } from "vue";
+import { computed } from "vue";
 
-const stats = inject('Stats')
+const stats = inject("Stats");
 
-const percent = computed(() =>
-  (stats.value.caughted / stats.value.totalPkm)
-)
+const percent = computed(() => stats.value.caughted / stats.value.totalPkm);
 </script>
 
 <style scoped>
@@ -51,7 +50,7 @@ const percent = computed(() =>
   margin-bottom: 1em;
   background-color: var(--dark);
   padding: 1em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +75,7 @@ const percent = computed(() =>
 }
 
 .charts-css {
-  --chart-bg-color: rgba(143, 144, 147, .1);
+  --chart-bg-color: rgba(143, 144, 147, 0.1);
   border-radius: 2em;
 }
 

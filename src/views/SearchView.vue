@@ -13,7 +13,6 @@
     <p class="btn" @click="searchCards()">ค้นหา</p>
   </div>
 
-  <!-- {{ Cards }} -->
   <img
     src="https://assets-v2.lottiefiles.com/a/ae47ca2c-bd64-11ef-8a23-cfbc45d0a788/HgjuHFgI6d.gif"
     alt="loading"
@@ -66,18 +65,17 @@ const onImageLoaded = () => {
 };
 
 const isAdd = ref(false);
-const selectedCardLink = ref("");
-const selectedCardImg = ref("");
 
 const searchText = ref("");
 
-const selectCard = (link, img) => {
+const selectCard = (link) => {
   axios
     .post("https://n8n.3xbun.com/webhook/card", {
       link: link,
     })
     .then((res) => {
       card.value = res.data[0];
+      card.value.Link = link;
       isAdd.value = true;
     });
 };

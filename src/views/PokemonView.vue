@@ -1,38 +1,69 @@
 <template>
   <div>
     <h1>{{ pokemonName }}การ์ด</h1>
+
+    <img
+      src="https://assets-v2.lottiefiles.com/a/ae47ca2c-bd64-11ef-8a23-cfbc45d0a788/HgjuHFgI6d.gif"
+      alt="loading"
+      class="loading"
+      v-if="isLoading"
+    />
+
     <ul class="cards">
-      <li @click="selectCard(card.id)" v-for="card in pokemonCards" :key="card.id">
-        <img :src="'https://asia.pokemon-card.com/th/card-img/' + card.id + '.png'" :alt="card.name">
+      <li v-for="card in Cards" :key="card.link" @click="selectCard(card.link)">
+        <img :src="card.img" :alt="card.img" />
       </li>
     </ul>
 
     <div class="wrapper" v-if="isAdd">
       <i class="fa-duotone fa-solid fa-circle-xmark" @click="isAdd = false"></i>
-      <AddCard :cardID="cardID" />
+      <AddCard :card="card" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
-const route = useRoute()
-const national_no = route.params.national_no
+import { useRoute } from "vue-router";
+const route = useRoute();
+const national_no = route.params.national_no;
 
-import AddCard from '../components/AddCard.vue';
-import { Cards } from '../assets/Cards.json';
-import { computed, ref } from 'vue';
+import AddCard from "../components/AddCard.vue";
+import { Pokemons } from "../assets/Pokemons.json";
+import { computed, ref, onMounted } from "vue";
+import axios from "axios";
 
-const isAdd = ref(false)
-const cardID = ref("")
+const isAdd = ref(false);
+const card = ref("");
 
-const pokemonCards = computed(() => Cards.filter(card => card.national_no == national_no))
-const pokemonName = pokemonCards.value[0].name
+const Cards = ref([]);
+const isLoading = ref(true);
 
-const selectCard = (id) => {
-  isAdd.value = true
-  cardID.value = id
-}
+const pokemonName = computed(() => {
+  return Pokemons.find((pokemon) => pokemon.nat_no == national_no).name;
+});
+
+const selectCard = (link) => {
+  axios
+    .post("https://n8n.3xbun.com/webhook/card", {
+      link: link,
+    })
+    .then((res) => {
+      card.value = res.data[0];
+      card.value.Link = link;
+      isAdd.value = true;
+    });
+};
+
+onMounted(() => {
+  axios
+    .post("https://n8n.3xbun.com/webhook/cards/search", {
+      keyword: pokemonName.value,
+    })
+    .then((res) => {
+      Cards.value = res.data;
+      isLoading.value = false;
+    });
+});
 </script>
 
 <style scoped>
@@ -50,12 +81,20 @@ const selectCard = (id) => {
   box-shadow: 0px -11px 20px -3px rgba(0, 0, 0, 0.75);
 }
 
+.loading {
+  width: 15%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .fa-circle-xmark {
   position: absolute;
   right: 1em;
-  top: .5em;
+  top: 0.5em;
   font-size: 2em;
-  opacity: .8;
+  opacity: 0.8;
   z-index: 99;
 }
 
